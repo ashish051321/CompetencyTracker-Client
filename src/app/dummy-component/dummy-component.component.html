@@ -1,0 +1,67 @@
+<div class="container-fluid" style="margin-top:10px;">
+  <form #myAssociateForm="ngForm" (ngSubmit)="onSubmitAssociate(myAssociateForm.value)">
+    <div class="row">
+
+      <div class="col-6 part1">
+
+        <div class="my-elem-group">
+          <label for="empid">Employee ID</label>
+          <input type="text" id="empid" name="empid" [(ngModel)]="associateToBeEdited.empid">
+        </div>
+
+        <div class="my-elem-group">
+          <label for="fullname">Full Name</label>
+          <input type="text" id="fullname" name="fullname" [(ngModel)]="associateToBeEdited.fullname">
+        </div>
+
+        <div class="my-elem-group">
+
+          <label for="designation">Designation</label>
+          <select id="designation" name="designation" [(ngModel)]="associateToBeEdited.designation">
+              <option *ngFor="let designationlabel of designationList">{{designationlabel}}</option>      
+            </select>
+          <div class="selectedInputs" *ngIf="associateToBeEdited.designation">
+            <span class="pellet">{{associateToBeEdited.designation}}<span class="crosssymbol" (click)="removeDesignation()">&nbsp;&nbsp;&times;</span></span>
+          </div>
+
+        </div>
+
+        <div class="my-elem-group">
+          <label for="startdate">Start Date</label>
+          <input id="startdate" name="startdate" type="date" [(ngModel)]="associateToBeEdited.startdate">
+        </div>
+
+        <div class="my-elem-group">
+
+          <label for="project">Project (You can add multiple)</label>
+
+          <select id="project" name="projectname" (ngModelChange)="projectOptionClickHandler()" ngModel>
+              <option *ngFor="let projectLabel of projectList" >{{projectLabel}}</option>      
+          </select>
+
+          <span class="selectedInputs" *ngIf="associateToBeEdited.projectname.length > 0">
+          Selected Projects: <span class="pellet" *ngFor="let plabel of associateToBeEdited.projectname">{{plabel}} <span class="crosssymbol" (click)="removeProject(plabel)">&nbsp;&nbsp;&times;</span></span>
+          </span>
+
+        </div>
+
+        <div class="my-elem-group">
+
+          
+        </div>
+
+
+      </div>
+      <!-- div col-6 ends -->
+
+
+      <div class="col-6 part2">
+
+
+      </div>
+      <!-- div col-6 ends -->
+
+    </div>
+    <!-- div row ends -->
+  </form>
+</div>

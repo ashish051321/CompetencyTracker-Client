@@ -1,0 +1,47 @@
+<div class="container-fluid" style="margin-top:10px;">
+
+
+  <div class="row" style="justify-content:space-around;">
+
+    <div class="col-6">
+      <div>
+        <h2>Existing Competencies</h2>
+      </div>
+
+      <input type="text" id="compNameToSearch" #compNameToSearch class="form-control" placeholder="Search Competency" (keyup)="searchByName(compNameToSearch.value)">
+
+      <span class="badge" style="color:white; background-color:blueviolet; margin:10px 0px 10px 0px;" (click)="clearSearch()">Clear Search</span>
+    
+
+      <div class="existingArtefacts">
+
+        <ul class="list-group" *ngFor="let compObj of competenciesToDisplay">
+          <li class="list-group-item">
+            {{compObj.competencyName}}
+            <!-- <span class="badge" id="teamsize">15</span>
+            <span class="badge" id="editArtefact">Edit</span> -->
+            <span class="badge" style="float:right" id="deleteArtefact" (click)="deleteComp(compObj.competencyName)">Delete</span>
+          </li>
+        </ul>
+
+
+      </div>
+
+    </div>
+
+    <div class="col-6" style="border-left: 1px solid black;">
+      <h2>Create a new Competency</h2>
+      <form #compForm="ngForm" (ngSubmit)="insertCompetency(compForm.value)" class="form-signup">
+        <input type="text" name="competencyName" id="competencyname" class="form-control mt-10" placeholder="Competency Name" required
+          ngModel>
+        <br>
+        <button class="btn btn-lg btn-primary btn-block" type="submit">Ok</button>
+        <br><br>
+      </form>
+    </div>
+
+
+
+  </div>
+  <!-- row ends -->
+</div>

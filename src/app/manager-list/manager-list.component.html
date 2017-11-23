@@ -1,0 +1,47 @@
+<div class="container-fluid" style="margin-top:10px;">
+  
+  
+    <div class="row" style="justify-content:space-around;">
+  
+      <div class="col-6">
+        <div>
+          <h2>Existing Managers</h2>
+        </div>
+  
+        <input type="text" id="mgrNameToSearch" #mgrNameToSearch class="form-control" placeholder="Search Manager" (keyup)="searchByName(mgrNameToSearch.value)">
+  
+        <span class="badge" style="color:white; background-color:blueviolet; margin:10px 0px 10px 0px;" (click)="clearSearch()">Clear Search</span>
+      
+  
+        <div class="existingArtefacts">
+  
+          <ul class="list-group" *ngFor="let managerObj of managersToDisplay">
+            <li class="list-group-item">
+              {{managerObj.managerName}}
+              <!-- <span class="badge" id="teamsize">15</span>
+              <span class="badge" id="editArtefact">Edit</span> -->
+              <span class="badge" style="float:right" id="deleteArtefact" (click)="deleteManager(managerObj.managerName)">Delete</span>
+            </li>
+          </ul>
+  
+  
+        </div>
+  
+      </div>
+  
+      <div class="col-6" style="border-left: 1px solid black;">
+        <h2>Create a new Manager</h2>
+        <form #mgrForm="ngForm" (ngSubmit)="insertManager(mgrForm.value)" class="form-signup">
+          <input type="text" name="managerName" id="managerName" class="form-control mt-10" placeholder="Manager Name" required
+            ngModel>
+          <br>
+          <button class="btn btn-lg btn-primary btn-block" type="submit">Ok</button>
+          <br><br>
+        </form>
+      </div>
+  
+  
+  
+    </div>
+    <!-- row ends -->
+  </div>

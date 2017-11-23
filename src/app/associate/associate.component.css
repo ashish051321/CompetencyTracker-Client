@@ -1,0 +1,92 @@
+div.container-fluid{
+margin-top:0px !important;
+padding-top: 10px !important;
+padding-bottom: 10px !important;
+    /* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#f6e6b4+0,ed9017+100;Yellow+3D+%231 */
+background: #f6e6b4; /* Old browsers */
+background: -moz-linear-gradient(top,  #f6e6b4 0%, #ed9017 100%); /* FF3.6-15 */
+background: -webkit-linear-gradient(top,  #f6e6b4 0%,#ed9017 100%); /* Chrome10-25,Safari5.1-6 */
+background: linear-gradient(to bottom,  #f6e6b4 0%,#ed9017 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#f6e6b4', endColorstr='#ed9017',GradientType=0 ); /* IE6-9 */
+
+}
+div.col-4 .dropdown button , div.col-4 .dropdown-menu{
+    width:100%;
+}
+div.col-4 .dropdown-menu{
+    background-color:rgba(240, 128, 128,0.97);
+    
+
+}
+
+div.col-4 .dropdown button{
+    text-align:left;
+}
+
+.input-group input{
+    font-size: 12x;
+}
+span.pellet{
+    display: inline-block;
+    padding:3px;
+    padding-left:5px;
+    padding-right:5px;
+    background-color:chocolate;
+    color:black;
+    border: 1px solid black;
+    border-radius: 8px;
+    margin-left: 2px;
+}
+
+.crosssymbol{
+    color: white;
+    cursor: pointer;
+}
+
+span.mandatoryField{
+      color:white;
+      font-size: 10px;
+      font-style: italic;
+      padding:2px;
+      background-color:red;
+      border: 1px solid black;
+      border-radius: 4px;
+}
+
+label.control-label{
+    font-weight:bold;
+}
+
+div#errorPrompt{
+    margin: 10px 0px 10px 0px;
+    font-style:italic;
+    background-color: #8A2F4D;
+    color: white;
+}
+
+/* card effect to form-groups */
+
+div.form-group{
+    /* Add shadows to create the "card" effect */
+    padding:5px;
+/* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#f2f6f8+0,d8e1e7+50,b5c6d0+51,e0eff9+100;Grey+Gloss+%232 */
+background: #f2f6f8; /* Old browsers */
+background: -moz-linear-gradient(top,  #f2f6f8 0%, #d8e1e7 50%, #b5c6d0 51%, #e0eff9 100%); /* FF3.6-15 */
+background: -webkit-linear-gradient(top,  #f2f6f8 0%,#d8e1e7 50%,#b5c6d0 51%,#e0eff9 100%); /* Chrome10-25,Safari5.1-6 */
+background: linear-gradient(to bottom,  #f2f6f8 0%,#d8e1e7 50%,#b5c6d0 51%,#e0eff9 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#f2f6f8', endColorstr='#e0eff9',GradientType=0 ); /* IE6-9 */
+    border-radius:10px;
+    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+    transition: 0.1s;
+}
+
+div.form-group:hover{
+box-shadow: 0 8px 16px 0 rgba(0,0,0,0.4);
+}
+
+
+span.selectedInputs{
+    display: inline-block;
+    font-weight: bold;
+    margin-top: 5px;
+}

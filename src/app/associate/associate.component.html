@@ -1,0 +1,262 @@
+<div class="container-fluid" style="margin-top:10px;">
+  <h2> <span *ngIf="editMode"> Edit Associate : <strong> {{associateToBeEdited.fullname}}</strong> </span><span *ngIf="!(editMode)">Create Associate</span></h2>
+  <div *ngIf="formErrors" class="row">
+    <div id="errorPrompt" class="col-12" tabindex="200">
+
+      You can't save an associate without:- <br> 1. Employee ID<br> 2. Full Name<br> 3. Designation<br> 4. Start Date<br>      5. Location<br> 6. Experience<br>
+
+    </div>
+  </div>
+
+  <form #myAssociateForm="ngForm" (ngSubmit)="onSubmitAssociate(myAssociateForm.value)">
+    <div class="row" style="justify-content:space-around;">
+      <div class="col-6">
+        <div class="form-group">
+          <label for="empid" class="control-label">Employee ID &nbsp;&nbsp; <span class="mandatoryField">Required</span></label>
+          <input type="text" id="empid" name="empid" class="form-control mt-10" placeholder="Employee ID" required [(ngModel)]="associateToBeEdited.empid">
+        </div>
+
+        <div class="form-group">
+          <label for="fullname" class="control-label">FullName &nbsp;&nbsp; <span class="mandatoryField">Required</span></label>
+          <input type="text" id="fullname" name="fullname" class="form-control mt-10" placeholder="Full Name" required [(ngModel)]="associateToBeEdited.fullname">
+        </div>
+
+        <div class="form-group">
+          <label for="designation" class="control-label">Designation &nbsp;&nbsp; <span class="mandatoryField">Required</span></label>
+          <select id="designation" name="designation" class="form-control" [(ngModel)]="associateToBeEdited.designation">
+            <option *ngFor="let designationlabel of designationList">{{designationlabel}}</option>      
+          </select>
+          <span class="selectedInputs" *ngIf="associateToBeEdited.designation">
+            Selected Designation: <span class="pellet">{{associateToBeEdited.designation}}<span class="crosssymbol" (click)="removeDesignation()">&nbsp;&nbsp;&times;</span></span>
+          </span>
+
+
+        </div>
+        <!-- /.form-group -->
+
+        <div class="form-group">
+          <label for="startdate" class="control-label">Start Date &nbsp;&nbsp; <span class="mandatoryField">Required</span></label>
+          <input id="startdate" name="startdate" type="date" class="form-control" aria-describedby="basic-addon2" [(ngModel)]="associateToBeEdited.startdate">
+        </div>
+
+        <div class="form-group">
+          <label for="project" class="control-label">Project (You can add multiple)</label>
+
+          <select id="project" name="projectname" class="form-control" (ngModelChange)="projectOptionClickHandler()" ngModel>
+            <option *ngFor="let projectLabel of projectList" >{{projectLabel}}</option>      
+          </select>
+
+          <span class="selectedInputs" *ngIf="associateToBeEdited.projectname.length > 0">
+            Selected Projects: <span class="pellet" *ngFor="let plabel of associateToBeEdited.projectname">{{plabel}} <span class="crosssymbol" (click)="removeProject(plabel)">&nbsp;&nbsp;&times;</span></span>
+          </span>
+
+        </div>
+        <!-- /.form-group -->
+
+
+        <div class="form-group">
+          <label class="control-label">Location of Associate&nbsp;&nbsp; <span class="mandatoryField">Required</span></label><br>
+          <label class="radio-inline" style="width:45%; background-color:lightcoral;text-align:center; padding:2px;"> 
+                <input  class="form-control" type="radio" name="location" id="onsiteRadio" value="Onsite" [(ngModel)]="associateToBeEdited.location">Onsite
+            </label>
+
+          <label class="radio-inline" style="width:50%; background-color:lightgreen;text-align:center;padding:2px;"> 
+                <input  class="form-control" type="radio" name="location" id="offshoreRadio" value="Offshore" [(ngModel)]="associateToBeEdited.location">Offshore
+            </label>
+        </div>
+
+        <div class="form-group">
+          <label for="experience" class="control-label">Experience &nbsp;&nbsp; <span class="mandatoryField">Required</span></label>
+          <select id="experience" name="experience" class="form-control" [(ngModel)]="associateToBeEdited.experience">
+              <option *ngFor="let expLabel of experienceYears">{{expLabel}}</option>      
+            </select>
+        </div>
+        <!-- /.form-group -->
+
+        <div class="form-group">
+          <label for="manager" class="control-label">Managers (You can add multiple)</label>
+          <select id="manager" name="manager" class="form-control" (ngModelChange)="managerOptionClickHandler()" ngModel>
+                <option *ngFor="let mgrLabel of managerList">{{mgrLabel}}</option>      
+          </select>
+          <span class="selectedInputs" *ngIf="associateToBeEdited.manager.length > 0">
+            Managers Mapped: <span class="pellet" *ngFor="let managerLabel of associateToBeEdited.manager">{{managerLabel}}<span class="crosssymbol" (click)="removeManager(managerLabel)">&nbsp;&nbsp;&times;</span></span>
+          </span>
+
+        </div>
+
+
+        <!-- /.form-group -->
+      </div>
+
+      <div class="col-6" style="border-left:1px solid grey;">
+
+        <button class="btn btn-block btn-primary" type="button" data-toggle="modal" data-target="#competencyModal">
+          Add Competencies
+        </button>
+        <br>
+        <!-- Added Competency list -->
+        <div *ngFor="let competencyitem of competenciesAdded">
+          <div style="margin:2px;padding:2px;background-color:darkcyan;border:1px solid black;border-radius:5px;">
+            <h4>{{competencyitem.competency}}</h4>
+            <h5><strong>Experience: </strong>{{competencyitem.competencyexp}} </h5>
+            <h5><strong>Expertise Level: </strong>{{competencyitem.expertiselevel}} </h5>
+            <h5><strong>Practical Experience: </strong>{{competencyitem.pracexp}} </h5>
+
+            <button *ngIf="!(competencyitem.isPrimary)" class="btn btn-sm" (click)="makePrimaryCompetency(competencyitem)">Make Primary</button>
+
+            <div *ngIf="competencyitem.isPrimary" style="display:inline-block;color:black;background-color:yellow">Primary Competency</div>
+            &nbsp;&nbsp;
+            <button class="btn btn-sm" (click)="deleteCompetency(competencyitem)">Delete</button>
+
+          </div>
+
+        </div>
+        <!-- Added Competency list ***********************************-->
+        <hr>
+
+        <button class="btn btn-block btn-primary" type="button" data-toggle="modal" data-target="#certificationModal">
+          Add Certifications
+        </button>
+        <br>
+        <!-- Added Certification list -->
+        <div *ngFor="let certificationitem of certificationsAdded">
+          <div style="margin:2px;padding:2px;background-color:darkcyan;border:1px solid black;border-radius:5px;">
+            <h4>{{certificationitem.certification}}</h4>
+            <h5><strong>Acquired Date: </strong>{{certificationitem.aqdate}} </h5>
+            <button class="btn btn-sm" (click)="deleteCertification(certificationitem)">Delete</button>
+
+          </div>
+
+        </div>
+        <!-- Added Certification list ***********************************-->
+
+      </div>
+
+    </div>
+    <div class="row mt-5 mb-5" style="justify-content: space-around;">
+      <div class="col-9">
+        <button class="btn btn-lg btn-success btn-block" type="submit">Ok</button>
+      </div>
+    </div>
+
+  </form>
+
+</div>
+
+<!-- Modal for Competencies-->
+
+<div class="modal fade" id="competencyModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content" style="background-color:#34495e;">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel" style="color:white;">Add Competency</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true" style="color:white;">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+
+        <form #myCompetencyForm="ngForm" (ngSubmit)="onSubmitCompetency(myCompetencyForm.value)">
+          <div class="form-group">
+            <label for="competency" class="control-label">Competency</label>
+            <select id="competency" name="competency" class="form-control" ngModel>
+                      <option *ngFor="let compLabel of competencyList">{{compLabel}}</option>      
+                    </select>
+          </div>
+          <!-- /.form-group -->
+
+
+          <div class="form-group">
+            <label for="competency" class="control-label">Experience in Competency</label>
+            <select id="competencyexp" name="competencyexp" class="form-control" ngModel>
+                  <option *ngFor="let compexpLabel of experienceYears">{{compexpLabel}}</option>      
+           </select>
+          </div>
+          <!-- /.form-group -->
+
+
+          <div class="form-group">
+            <label for="expertiselevel" class="control-label">Expertise Level</label>
+            <select id="expertiselevel" name="expertiselevel" class="form-control" ngModel>
+                <option *ngFor="let explvlLabel of competencyExpertiseLevel">{{explvlLabel}}</option>      
+             </select>
+          </div>
+          <!-- /.form-group -->
+
+
+          <div class="form-group">
+            <label class="control-label">Has Practical Experience ?</label> <br>
+            <label class="radio-inline" style="width:45%; background-color:lightgreen;text-align:center; padding:2px;color:black;"> 
+              <input  class="form-control" type="radio" name="pracexp" id="expYesRadio" value="Yes" ngModel>Yes
+            </label>
+
+            <label class="radio-inline" style="width:50%; background-color:lightcoral;text-align:center;padding:2px;color:black;"> 
+                <input  class="form-control" type="radio" name="pracexp" id="expNoRadio" value="No" ngModel>No
+            </label>
+          </div>
+          <br>
+          <button type="submit" class="btn btn-default">Submit</button>
+        </form>
+
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Modal for Certifications -->
+
+
+<!-- Modal -->
+<div class="modal fade" id="certificationModal" tabindex="-1" role="dialog" aria-labelledby="certificationModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content" style="background-color:#34495e;">
+      <div class="modal-header">
+        <h5 class="modal-title" id="certificationModal" style="color:white;">Add Certification</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true" style="color:white;">&times;</span>
+          </button>
+      </div>
+      <div class="modal-body">
+
+        <form #myCertificationForm="ngForm" (ngSubmit)="onSubmitCertification(myCertificationForm.value)">
+          <div class="form-group">
+            <label for="certification" class="control-label">Certification</label>
+            <select id="certification" name="certification" class="form-control" ngModel>
+                        <option *ngFor="let certLabel of certificationList">{{certLabel}}</option>      
+                      </select>
+          </div>
+          <!-- /.form-group -->
+
+
+          <div class="form-group">
+            <label for="aqdate" class="control-label">Acquired  Date</label>
+            <input id="aqdate" name="aqdate" type="date" class="form-control" aria-describedby="basic-addon2" ngModel>
+          </div>
+          <br>
+
+          <button type="submit" class="btn btn-default">Submit</button>
+        </form>
+
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- The Alert modal- Used while saving the associate -->
+<div class="modal fade" id="promptOnSave" tabindex="-1" role="dialog" aria-labelledby="modalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title" id="promptOnSavemodalLabel">Employee Database Says...</h4>
+      </div>
+      <div class="modal-body">
+        <h3><strong>{{databaseMessage}}</strong></h3>
+
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" (click)="navigateToHome()">Ok</button>
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Stay and Edit</button>
+      </div>
+    </div>
+  </div>
+</div>

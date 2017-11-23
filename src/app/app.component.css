@@ -1,0 +1,19 @@
+#analyticsLink,#bulkUploadLink,#masterRecLink,#empRecLink{
+    display: inline-block;
+    line-height:  32px;
+    border-radius:10px;
+}
+
+.nav-item.dropdown{
+    display: inline-block;
+    line-height:  32px;
+    }
+
+    @media only  screen and (max-width: 767px) {
+        #analyticsLink,#bulkUploadLink,#masterRecLink,#empRecLink{
+            margin-top:10px;
+        }
+        .nav-item.dropdown{
+            margin-top:10px;
+        }
+    }

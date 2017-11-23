@@ -1,0 +1,87 @@
+/* div.part1{
+    background-color: lightcoral;
+
+}
+
+div.part2{
+    background-color: lightblue;
+} */
+
+div.my-elem-group{
+    /* To allow for pellet to position accordingly */
+    position: relative; 
+    font-size:21px;
+    /* font-family: Courier New, Courier, monospace; */
+    font-family: 'Source Sans Pro', sans-serif;
+    
+    
+    margin-bottom:10px;
+}
+
+div.my-elem-group > label{
+    
+  width:30%;
+  font-weight:bold;
+  
+  /* text-align: right; */
+}
+
+div.my-elem-group > input{
+    width:60%;
+    border:0px;
+    border-bottom: solid black 1px; 
+    /* font-family:'Lucida Casual', 'Comic Sans MS'; */
+    /* font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif; */
+    font-family: 'Source Sans Pro', sans-serif;
+    font-size:17px;
+    letter-spacing: 2px;
+    word-spacing: 6px;
+    
+    
+}
+
+div.my-elem-group > input:focus{
+    background-color: #7DE463;
+    outline: none;
+}
+
+
+div.my-elem-group > select{
+    width:60%;
+    border:0px;
+    border-bottom: solid black 1px;
+    font-family: 'Source Sans Pro', sans-serif;
+    font-size:17px;
+    letter-spacing: 2px;
+    word-spacing: 6px;
+}
+div.my-elem-group > select > option{
+
+    font-family: 'Source Sans Pro', sans-serif;
+    font-size:17px;
+    letter-spacing: 2px;
+    word-spacing: 6px;
+
+}
+
+
+
+span.pellet{
+ 
+    border:1px solid transparent;
+    border-radius: 5px;
+    display: inline-block;
+    height:35px;
+    line-height: 35px;
+    font-family: 'Source Sans Pro', sans-serif;
+    font-size:17px;
+    letter-spacing: 2px;
+    word-spacing: 6px;
+    background-color: #7DE463;
+
+}
+
+span.crosssymbol{
+    cursor:pointer;
+    color: white;
+}

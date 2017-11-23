@@ -1,0 +1,11 @@
+.container-fluid{
+    background: url('../../assets/images/intersection.png')
+    /* background-color: transparent; */
+}
+
+#fileUpBut{
+    display:inline-block;
+    height: 40px;
+    background-color: lightcoral;
+    color:white;
+}

@@ -1,0 +1,25 @@
+<div class="container-fluid">
+    
+      <div class="row">
+    
+        <div class="col-4 mx-auto">
+          
+          <h3 class="text-center">Please Upload the Excel File</h3>
+    
+          <form class="form">
+    
+            <div class="form-group">
+                <input class="form-control" id="fileUpBut" type="file" #fileUploaded />
+                <button id="fileUploadSubmit" class="form-control btn btn-primary" (click)="onFileSubmit(fileUploaded.files)">Upload File</button>
+            </div>
+    
+          </form>
+    
+        </div>
+        <!-- col-12 ends -->
+    
+    
+      </div>
+    
+    
+    </div>

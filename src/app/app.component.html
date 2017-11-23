@@ -1,0 +1,61 @@
+<div class="container-fluid">
+  <nav class="navbar navbar-expand-md navbar-dark bg-dark">
+
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#nav-content" aria-controls="nav-content"
+      aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <!-- Brand -->
+
+    <a class="navbar-brand" routerLink="/home">
+        <img src="/assets/images/home.png" width="30" height="30" class="d-inline-block align-top" alt="">
+        Project Management
+    </a>
+
+    <!-- Links -->
+    <div class="" id="nav-content">
+      <ul class="navbar-nav">
+        <li class="nav-item">
+          <!-- <button type="submit" class="btn btn-sm btn-primary" routerLink="/associateList">Employee Records</button> -->
+          <a style="margin-left:15px;"class="nav-link bg-primary text-white" id="empRecLink" routerLink="/associateList" routerLinkActive="active">
+            &nbsp;<img src="/assets/images/employees.png" width="30" height="30" class="d-inline-block align-top" alt="">&nbsp;Employee Records&nbsp;</a>
+        </li>
+        <li class="nav-item dropdown" style="margin-left: 15px;">
+          <a id="masterRecLink" style="border-radius:10px; color:white; background-color:lightcoral;"class="nav-link dropdown-toggle" data-toggle="dropdown" id="Preview" href="#" role="button" aria-haspopup="true" aria-expanded="false">
+            &nbsp;<img src="/assets/images/note.png" width="30" height="30" class="d-inline-block align-top" alt="">&nbsp;Manage Master List
+          </a>
+
+          <div class="dropdown-menu" aria-labelledby="Preview">
+            <a class="dropdown-item" routerLink="/associate">Create Employee</a>
+            <a class="dropdown-item" routerLink="/competencyList">Competencies</a>
+            <a class="dropdown-item" routerLink="/certificationList">Certifications </a>
+            <a class="dropdown-item" routerLink="/managerList">Managers</a>
+            <a class="dropdown-item" routerLink="/projectList">Projects</a>
+          </div>
+        </li>
+
+        <li class="nav-item" style="margin-left: 15px;">
+          <!-- <button type="submit" class="btn btn-sm btn-primary" routerLink="/associateList">Employee Records</button> -->
+          <a class="nav-link text-white" id="analyticsLink" routerLink="/reports" style="background-color:#FF7058">
+            &nbsp;<img src="/assets/images/analytics.png" width="30" height="30" class="d-inline-block align-top" alt="">&nbsp;Analytics&nbsp;</a>
+        </li>
+
+
+        <li class="nav-item" style="margin-left: 15px;">
+          <!-- <button type="submit" class="btn btn-sm btn-primary" routerLink="/associateList">Employee Records</button> -->
+          <a class="nav-link text-white" id="bulkUploadLink" routerLink="/bulkUploadAssociate" style="background-color:#F89F6A">
+            &nbsp;<img src="/assets/images/up-arrow.png" width="30" height="30" class="d-inline-block align-top" alt="">&nbsp;Upload Employee Records&nbsp;</a>
+        </li>
+
+
+
+
+      </ul>
+    </div>
+  </nav>
+  <!-- Navbar ends -->
+</div>
+<!-- fluid container ends -->
+
+<router-outlet> </router-outlet>

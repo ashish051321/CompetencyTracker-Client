@@ -1,0 +1,223 @@
+<div class="container-fluid" style="margin-top:10px;">
+
+  <h2>Edit Associate: {{myassociate.fullname}}</h2>
+
+  <form #myAssociateForm="ngForm" (ngSubmit)="onSubmitAssociate(myAssociateForm.value)">
+    <div class="row" style="justify-content:space-around;">
+      <div class="col-6">
+        <label for="empid" class="control-label">Employee ID</label>
+        <input type="text" id="empid" name="empid" class="form-control mt-10" placeholder="Employee ID" required ngModel>
+        <br>
+        <label for="fullname" class="control-label">Full Name</label>
+        <input type="text" id="fullname" name="fullname" class="form-control mt-10" placeholder="Full Name" required ngModel>
+
+        <br>
+        <div class="form-group">
+          <label for="designation" class="control-label">Designation</label>
+          <select id="designation" name="designation" class="form-control" ngModel>
+                <option *ngFor="let designationlabel of designationList">{{designationlabel}}</option>      
+              </select>
+        </div>
+        <!-- /.form-group -->
+
+        <div class="form-group">
+          <label for="startDate" class="control-label">Start Date</label>
+          <input id="startDate" name="startDate" type="date" class="form-control" aria-describedby="basic-addon2" ngModel>
+        </div>
+
+        <div class="form-group">
+          <label for="endDate" class="control-label">End Date</label>
+          <input id="endDate" name="endDate" type="date" class="form-control" aria-describedby="basic-addon2" ngModel>
+        </div>
+
+
+        <div class="form-group">
+          <label for="project" class="control-label">Project</label>
+          <select id="project" name="projectname" class="form-control" ngModel>
+                <option *ngFor="let projectLabel of projectList">{{projectLabel}}</option>      
+              </select>
+        </div>
+        <!-- /.form-group -->
+
+
+        <div class="form-group">
+
+          <label class="radio-inline" style="width:45%; background-color:lightcoral;text-align:center; padding:2px;"> 
+                    <input  class="form-control" type="radio" name="location" id="onsiteRadio" value="Onsite" ngModel>Onsite
+                </label>
+
+          <label class="radio-inline" style="width:50%; background-color:lightgreen;text-align:center;padding:2px;"> 
+                    <input  class="form-control" type="radio" name="location" id="offshoreRadio" value="Offshore" ngModel>Offshore
+                </label>
+        </div>
+
+        <div class="form-group">
+          <label for="experience" class="control-label">Experience</label>
+          <select id="experience" name="experience" class="form-control" ngModel>
+                  <option *ngFor="let expLabel of experienceYears">{{expLabel}}</option>      
+                </select>
+        </div>
+        <!-- /.form-group -->
+        <br>
+        <div class="form-group">
+          <label for="manager" class="control-label">Manager</label>
+          <select id="manager" name="manager" class="form-control" ngModel>
+                    <option *ngFor="let mgrLabel of managerList">{{mgrLabel}}</option>      
+                  </select>
+        </div>
+        <!-- /.form-group -->
+      </div>
+
+      <div class="col-6" style="border-left:1px solid grey;">
+
+        <button class="btn btn-block btn-primary" type="button" data-toggle="modal" data-target="#competencyModal">
+              Add Competencies
+            </button>
+        <br>
+        <!-- Added Competency list -->
+        <div *ngFor="let competencyitem of competenciesAdded">
+          <div style="margin:2px;padding:2px;background-color:darkcyan;border:1px solid black;border-radius:5px;">
+            <h4>{{competencyitem.competency}}</h4>
+            <h5><strong>Experience: </strong>{{competencyitem.competencyexp}} </h5>
+            <h5><strong>Expertise Level: </strong>{{competencyitem.expertiseLevel}} </h5>
+            <h5><strong>Practical Experience: </strong>{{competencyitem.pracExp}} </h5>
+
+            <button *ngIf="!(competencyitem.isPrimary)" class="btn btn-sm" (click)="makePrimaryCompetency(competencyitem)">Make Primary</button>
+
+            <div *ngIf="competencyitem.isPrimary" style="display:inline-block;color:black;background-color:yellow">Primary Competency</div>
+            &nbsp;&nbsp;
+            <button class="btn btn-sm" (click)="deleteCompetency(competencyitem)">Delete</button>
+
+          </div>
+
+        </div>
+        <!-- Added Competency list ***********************************-->
+        <hr>
+
+        <button class="btn btn-block btn-primary" type="button" data-toggle="modal" data-target="#certificationModal">
+              Add Certifications
+            </button>
+        <br>
+        <!-- Added Certification list -->
+        <div *ngFor="let certificationitem of certificationsAdded">
+          <div style="margin:2px;padding:2px;background-color:darkcyan;border:1px solid black;border-radius:5px;">
+            <h4>{{certificationitem.certification}}</h4>
+            <h5><strong>Acquired Date: </strong>{{certificationitem.aqDate}} </h5>
+            <button class="btn btn-sm" (click)="deleteCertification(certificationitem)">Delete</button>
+
+          </div>
+
+        </div>
+        <!-- Added Certification list ***********************************-->
+
+      </div>
+
+    </div>
+    <div class="row mt-5 mb-5" style="justify-content: space-around;">
+      <div class="col-9">
+        <button class="btn btn-lg btn-success btn-block" type="submit">Ok</button>
+      </div>
+    </div>
+
+  </form>
+
+</div>
+
+<!-- Modal for Competencies-->
+
+<div class="modal fade" id="competencyModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content" style="background-color:#34495e; color:white;">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Add Competency</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+      </div>
+      <div class="modal-body">
+
+        <form #myCompetencyForm="ngForm" (ngSubmit)="onSubmitCompetency(myCompetencyForm.value)">
+          <div class="form-group">
+            <label for="competency" class="control-label">Competency</label>
+            <select id="competency" name="competency" class="form-control" ngModel>
+                          <option *ngFor="let compLabel of competencyList">{{compLabel}}</option>      
+                        </select>
+          </div>
+          <!-- /.form-group -->
+
+
+          <div class="form-group">
+            <label for="competency" class="control-label">Experience in Competency</label>
+            <select id="competencyexp" name="competencyexp" class="form-control" ngModel>
+                            <option *ngFor="let compexpLabel of experienceYears">{{compexpLabel}}</option>      
+               </select>
+          </div>
+          <!-- /.form-group -->
+
+
+          <div class="form-group">
+            <label for="expertiseLevel" class="control-label">Expertise Level</label>
+            <select id="expertiseLevel" name="expertiseLevel" class="form-control" ngModel>
+                    <option *ngFor="let explvlLabel of competencyExpertiseLevel">{{explvlLabel}}</option>      
+                 </select>
+          </div>
+          <!-- /.form-group -->
+
+
+          <div class="form-group">
+            <label class="control-label">Has Practical Experience ?</label> <br>
+            <label class="radio-inline" style="width:45%; background-color:lightgreen;text-align:center; padding:2px;color:black;"> 
+                  <input  class="form-control" type="radio" name="pracExp" id="expYesRadio" value="Yes" ngModel>Yes
+                </label>
+
+            <label class="radio-inline" style="width:50%; background-color:lightcoral;text-align:center;padding:2px;color:black;"> 
+                    <input  class="form-control" type="radio" name="pracExp" id="expNoRadio" value="No" ngModel>No
+                </label>
+          </div>
+          <br>
+          <button type="submit" class="btn btn-default">Submit</button>
+        </form>
+
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Modal for Certifications -->
+
+
+<!-- Modal -->
+<div class="modal fade" id="certificationModal" tabindex="-1" role="dialog" aria-labelledby="certificationModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content" style="background-color:#34495e; color:white;">
+      <div class="modal-header">
+        <h5 class="modal-title" id="certificationModal">Add Certification</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+      </div>
+      <div class="modal-body">
+
+        <form #myCertificationForm="ngForm" (ngSubmit)="onSubmitCertification(myCertificationForm.value)">
+          <div class="form-group">
+            <label for="certification" class="control-label">Certification</label>
+            <select id="certification" name="certification" class="form-control" ngModel>
+                            <option *ngFor="let certLabel of certificationList">{{certLabel}}</option>      
+                          </select>
+          </div>
+          <!-- /.form-group -->
+
+
+          <div class="form-group">
+            <label for="aqDate" class="control-label">Acquired  Date</label>
+            <input id="aqDate" name="aqDate" type="date" class="form-control" aria-describedby="basic-addon2" ngModel>
+          </div>
+          <br>
+
+          <button type="submit" class="btn btn-default">Submit</button>
+        </form>
+
+      </div>
+    </div>
+  </div>
+</div>

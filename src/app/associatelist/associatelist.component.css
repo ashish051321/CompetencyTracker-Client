@@ -1,0 +1,30 @@
+.container-fluid{
+    background: url('../../assets/images/intersection.png')
+    /* background-color: transparent; */
+}
+
+div.headerrow{
+padding:5px;
+background-color: #34495e;
+color:white;
+margin-top: 5px;
+}
+
+div.icondiv{
+    display: inline-block;
+  
+}
+div.icondiv > i {
+    color:white;
+}
+
+
+.thead-inverse > tr > th {
+    cursor:pointer;
+}
+
+tbody.associateMasterList > tr > td:nth-child(2) , tbody.associateMasterList > tr > td:nth-child(3){
+  color:blue;
+  text-decoration:underline;
+  cursor: pointer;
+}

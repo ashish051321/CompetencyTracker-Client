@@ -1,0 +1,7 @@
+<div class="dropdown" form-control>
+  <button class="btn btn-primary dropdown-toggle" type="button" id="about-us" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+      {{selectedItem}}
+  </button>
+  <div class="dropdown-menu" aria-labelledby="about-us">
+      <button class="dropdown-item" *ngFor="let item of  Itemlist" (click)="updateDropdown(item)">{{item}}</button>    </div>
+</div>

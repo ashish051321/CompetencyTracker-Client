@@ -1,0 +1,86 @@
+<div *ngIf="dataReceived" class="container-fluid" style="padding-top:10px;">
+
+  <div class="row">
+    <div class="col-12">
+      <h1>Employee Records</h1>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-12">
+      <h2>Count of Employees: {{associateList.length}}</h2>
+    </div>
+  </div>
+
+
+  <div class="row">
+    <div class="col-12">
+      <table class="table table-bordered table-striped table-responsive">
+        <thead class="thead-inverse">
+          <tr>
+            <th>#<br>&nbsp;</th>
+            <th> <span (click)="sortByEmpID()">Employee ID &#8597;</span>
+              <br>
+              <input style="width:80px;" type="text" #empidbox (keyup)="filterByEmpID(empidbox.value)">
+            </th>
+            <th> <span (click)="sortByName()">Name &#8597;</span>
+              <br>
+              <input style="width:160px;" type="text" #namebox (keyup)="filterByName(namebox.value)">
+
+            </th>
+            <th>Designation <br>&nbsp;</th>
+            <th> <span>Project</span><br>
+              <select id="project" name="project"  [ngModel]="selectedProject" (ngModelChange)="filterByProject($event)" ngModel>
+                <option>--All--</option>        
+                <option *ngFor="let projectLabel of projectList">{{projectLabel}}</option>      
+              </select>
+
+            </th>
+            <th>Location <br>&nbsp;</th>
+            <th>Manager<br>&nbsp;</th>
+            <th>Primary Competency<br>&nbsp;</th>
+            <th>Actions<br>&nbsp;</th>
+          </tr>
+        </thead>
+
+        <tbody class="associateMasterList">
+          <tr *ngFor="let associate of associateList;let i = index">
+            <td>{{i+1}}</td>
+            <td (click)="editAssociate(associate.empid)">{{associate.empid}} </td>
+            <td (click)="editAssociate(associate.empid)">{{associate.fullname}} </td>
+            <td>{{associate.designation}} </td>
+            <td>{{associate.projectname}} </td>
+            <td>{{associate.location}} </td>
+            <td>{{associate.manager}} </td>
+            <td>{{extractPrimaryCompetency(associate)}} </td>
+            <td><button (click)="editAssociate(associate.empid)">Edit</button> &nbsp;<button (click)="deleteAssociate(associate.empid)">Delete</button></td>
+
+          </tr>
+        </tbody>
+      </table>
+
+
+
+    </div>
+  </div>
+
+</div>
+<!-- container-fluid ends -->
+
+<!-- The Alert modal- Used while saving the associate -->
+<div class="modal fade" id="promptOnAction" tabindex="-1" role="dialog" aria-labelledby="modalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title" id="promptOnActionmodalLabel">Employee Database Says...</h4>
+      </div>
+      <div class="modal-body">
+        <h3><strong>{{databaseMessage}}</strong></h3>
+
+      </div>
+      <div class="modal-footer">
+         <button type="button" class="btn btn-secondary" data-dismiss="modal">Ok</button>
+      </div>
+    </div>
+  </div>
+</div>
+
