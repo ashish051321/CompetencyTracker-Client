@@ -39,9 +39,18 @@ export class AssociatelistComponent implements OnInit {
       this.dataReceived = true;
       // this.dbService.setAssociate(data);
     });
-
-
   }
+
+  // getAllCompetencies() {
+  //   this.dbService.getAllCompetencies().subscribe((data) => {
+  //     this.existingCompetencies = data;
+  //     this.competenciesToDisplay = this.existingCompetencies.slice();//creating a new array;
+  //     this.competenciesToDisplay.reverse();
+  //   });
+
+  // }//getAllCompetencies
+
+
 
   editAssociate(associateEmpId) {
     //  console.log(associateEmpId);

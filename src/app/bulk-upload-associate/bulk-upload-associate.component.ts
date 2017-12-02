@@ -21,7 +21,7 @@ export class BulkUploadAssociateComponent implements OnInit {
       // Create a new FormData object.
       var formData = new FormData();
   
-      // Loop through each of the selected files.
+      // Loop through each of the selected files.//in th ui, we are allowing just one file selectin, so the loop is kinda redundant !
       for (var i = 0; i < files.length; i++) {
         var file = files[i];
   
@@ -38,7 +38,11 @@ export class BulkUploadAssociateComponent implements OnInit {
       var xhr = new XMLHttpRequest();
   
       xhr.open('POST', 'http://localhost:9500/bulkupload', true);
-  
+       
+      // Send the Data.
+       xhr.send(formData);
+
+
       // Set up a handler for when the request finishes.
       xhr.onload = function () {
         if (xhr.status == 200) {
@@ -58,12 +62,10 @@ export class BulkUploadAssociateComponent implements OnInit {
         }
       };
   
-      // Send the Data.
-      xhr.send(formData);
+     
   
   
   
     }
   
   }
-  
