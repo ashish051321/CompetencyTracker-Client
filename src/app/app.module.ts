@@ -26,6 +26,15 @@ import { CustomDropdownComponent } from './custom-dropdown/custom-dropdown.compo
 import { EditAssociateComponent } from './edit-associate/edit-associate.component';
 import { DummyComponentComponent } from './dummy-component/dummy-component.component';
 
+//Firebase
+
+
+import { AngularFireModule } from 'angularfire2';
+
+// New imports to update based on AngularFire2 version 4
+import { AngularFireDatabaseModule, AngularFireDatabase } from 'angularfire2/database';
+import { AngularFireAuthModule, AngularFireAuth } from 'angularfire2/auth';
+
 
 const appRoutes: Routes = [
   { path: 'home', component: HomeComponent },
@@ -42,6 +51,15 @@ const appRoutes: Routes = [
   { path: 'editassociate', component: EditAssociateComponent},
   { path: 'dummy', component: DummyComponentComponent}
   ];
+
+  const firebaseConfig =  {
+    apiKey: "AIzaSyAGnXoUeYiceWVB7FK83bAta7ufU6BL7uI",
+    authDomain: "emptracker-a9a1b.firebaseapp.com",
+    databaseURL: "https://emptracker-a9a1b.firebaseio.com",
+    projectId: "emptracker-a9a1b",
+    storageBucket: "emptracker-a9a1b.appspot.com",
+    messagingSenderId: "6815018090"
+  };
 
 @NgModule({
   declarations: [
@@ -63,9 +81,12 @@ const appRoutes: Routes = [
     BrowserModule,
     HttpClientModule,
     FormsModule, RouterModule.forRoot(appRoutes,
-      { enableTracing: false })
+      { enableTracing: false }),
+      AngularFireModule.initializeApp(firebaseConfig),
+    AngularFireDatabaseModule,
+    AngularFireAuthModule
   ],
-  providers: [DBserviceService],
+  providers: [DBserviceService,AngularFireAuth, AngularFireDatabase],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
